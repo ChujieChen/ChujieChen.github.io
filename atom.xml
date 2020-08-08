@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chujiechen.github.io/"/>
-  <updated>2020-08-08T02:09:22.479Z</updated>
+  <updated>2020-08-08T05:20:50.966Z</updated>
   <id>https://chujiechen.github.io/</id>
   
   <author>
@@ -15,6 +15,29 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>First Post Test</title>
+    <link href="https://chujiechen.github.io/2020/08/07/first-post-test/"/>
+    <id>https://chujiechen.github.io/2020/08/07/first-post-test/</id>
+    <published>2020-08-08T05:20:11.000Z</published>
+    <updated>2020-08-08T05:20:50.966Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;h1 id=&quot;This-is-a-Test&quot;&gt;&lt;a href=&quot;#This-is-a-Test&quot; class=&quot;headerlink&quot; title=&quot;This is a Test&quot;&gt;&lt;/a&gt;This is a Test&lt;/h1&gt;&lt;p&gt;As described in the
+        
+      
+    
+    </summary>
+    
+    
+    
+  </entry>
   
   <entry>
     <title>Hello World</title>
