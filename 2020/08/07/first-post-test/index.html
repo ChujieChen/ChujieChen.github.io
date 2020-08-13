@@ -388,25 +388,7 @@
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="This-is-a-Test"><a href="#This-is-a-Test" class="headerlink" title="This is a Test"></a>This is a Test</h1><p>As described in the title…</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr/>
 
@@ -679,9 +661,6 @@
                     <div class="summary block-with-text">
                         
                             This is a TestAs described in the title…
-
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
 
                         
                     </div>
