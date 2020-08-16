@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chujiechen.github.io/"/>
-  <updated>2020-08-08T05:20:50.966Z</updated>
+  <updated>2020-08-16T02:30:11.912Z</updated>
   <id>https://chujiechen.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>First Post Test</title>
-    <link href="https://chujiechen.github.io/2020/08/07/first-post-test/"/>
-    <id>https://chujiechen.github.io/2020/08/07/first-post-test/</id>
-    <published>2020-08-08T05:20:11.000Z</published>
-    <updated>2020-08-08T05:20:50.966Z</updated>
+    <title>Does A* always return an optimal path?</title>
+    <link href="https://chujiechen.github.io/2020/08/15/admissibility-of-a/"/>
+    <id>https://chujiechen.github.io/2020/08/15/admissibility-of-a/</id>
+    <published>2020-08-16T02:19:36.000Z</published>
+    <updated>2020-08-16T02:30:11.912Z</updated>
     
     <summary type="html">
     
@@ -29,36 +29,21 @@
       
         
         
-          &lt;h1 id=&quot;This-is-a-Test&quot;&gt;&lt;a href=&quot;#This-is-a-Test&quot; class=&quot;headerlink&quot; title=&quot;This is a Test&quot;&gt;&lt;/a&gt;This is a Test&lt;/h1&gt;&lt;p&gt;As described in the
+          &lt;p&gt;So A* is a static path search algorithm which is used to find the shortest path from the source (S) to the goal (G) from a finite
         
       
     
     </summary>
     
     
-    
-  </entry>
-  
-  <entry>
-    <title>Hello World</title>
-    <link href="https://chujiechen.github.io/2020/08/07/hello-world/"/>
-    <id>https://chujiechen.github.io/2020/08/07/hello-world/</id>
-    <published>2020-08-08T02:09:22.479Z</published>
-    <updated>2020-08-08T02:09:22.479Z</updated>
-    
-    <summary type="html">
-    
-      
-      
-        
-        
-          &lt;p&gt;Welcome to &lt;a href=&quot;https://hexo.io/&quot;&gt;Hexo&lt;/a&gt;! This is your very first post. Check &lt;a href=&quot;https://hexo.io/docs/&quot;&gt;documentation&lt;/a&gt;
-        
-      
-    
-    </summary>
+      <category term="Algorithm" scheme="https://chujiechen.github.io/categories/Algorithm/"/>
     
     
+      <category term="Math" scheme="https://chujiechen.github.io/tags/Math/"/>
+    
+      <category term="Algorithm" scheme="https://chujiechen.github.io/tags/Algorithm/"/>
+    
+      <category term="Graph" scheme="https://chujiechen.github.io/tags/Graph/"/>
     
   </entry>
   

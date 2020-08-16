@@ -4,26 +4,29 @@
   
     
     <entry>
-      <title>First Post Test</title>
-      <link href="/2020/08/07/first-post-test/"/>
-      <url>/2020/08/07/first-post-test/</url>
+      <title>Does A* always return an optimal path?</title>
+      <link href="/2020/08/15/admissibility-of-a/"/>
+      <url>/2020/08/15/admissibility-of-a/</url>
       
-        <content type="html"><![CDATA[<h1 id="This-is-a-Test"><a href="#This-is-a-Test" class="headerlink" title="This is a Test"></a>This is a Test</h1><p>As described in the title…</p>]]></content>
-      
-      
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Hello World</title>
-      <link href="/2020/08/07/hello-world/"/>
-      <url>/2020/08/07/hello-world/</url>
-      
-        <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+        <content type="html"><![CDATA[<p>So A* is a static path search algorithm which is used to find the shortest path from the source (S) to the goal (G) from a finite weighted graph. The math representation of A* is<br>$$f(n) = c(n) + h(n) $$</p><p>Some people may prefer using $g$ instead of $c$ to indicate the cost function. And the $h$ is a heuristic function. More information can be found from the original <a href="https://ai.stanford.edu/~nilsson/OnlinePubs-Nils/PublishedPapers/astar.pdf">paper</a>.</p><p>So let’s get back to the title, how about the admissibility of A*? Well, as we can guess, it actually relies on the heuristic function. Again, A* algorithm requires the $h$ should be a ‘good’ estimation or ‘admissible’ (meaning it has to be no longer than the actual distance, but if $h$ has no meaning, e.g. 0, then it is BFS). An example in real life is letting $h$ be the Euclidean distance from the node to the goal in navigation. But what does it do with the optimality? Here’s a simplied math proof (proof by contradiction):</p><p>Say all previous states (till $n$) have optimal cost values already. For the next state (till $n’$) we would have $f(n’)=c(n’)+h(n’)$ which is minimun among states in OPEN list. But let’s assume g(n’) itself is actually suboptimal,  that means there has to be at least one state $n’^*$ on an optimal path from S that is in OPEN,<br>$$c(n’^*) + h(n’^*) \geq  c(n’) + h(n’)  \qquad  (1)(\text{min})$$<br>meaning on the same time we have<br>$$c(n’^*) + \delta(n’^*, n’) &lt;  c(n’) \qquad  (2)(\text{assumption})$$<br>Rewrite (2) can give us<br>$$c(n’^*) + \delta(n’^*, n’) + h(n’) &lt;  c(n’) + h(n’) \qquad  (3) $$<br>As $h$ is admissible, we have<br>$$h(n’^*) +   \delta(n’^*, n’) &lt; h(n’) \qquad (4) (<br>\text{underestimate}) $$<br>So (3) would be<br>$$ c(n’^*) + h(n’^*) &lt; c(n’) + h(n’)$$<br>which is contradictory with (1), so $c(n)$ must be optimal.</p><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
       
       
+      <categories>
+          
+          <category> Algorithm </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Math </tag>
+            
+            <tag> Algorithm </tag>
+            
+            <tag> Graph </tag>
+            
+        </tags>
       
     </entry>
     
