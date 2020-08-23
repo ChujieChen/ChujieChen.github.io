@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Does A* always return an optimal path?, Black Vinegar">
+    <meta name="keywords" content="Git Upstreams &amp; Submodules, Black Vinegar">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Does A* always return an optimal path? | Black Vinegar</title>
+    <title>Git Upstreams &amp; Submodules | Black Vinegar</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -237,12 +237,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://www.growingwiththeweb.com/images/2012/06/03/demo.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://vitess.io/img/git-workflow.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Does A* always return an optimal path?</h1>
+                    <h1 class="description center-align post-title">Git Upstreams &amp; Submodules</h1>
                 </div>
             </div>
         </div>
@@ -359,16 +359,8 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Math/">
-                                <span class="chip bg-color">Math</span>
-                            </a>
-                        
-                            <a href="/tags/Algorithm/">
-                                <span class="chip bg-color">Algorithm</span>
-                            </a>
-                        
-                            <a href="/tags/Graph/">
-                                <span class="chip bg-color">Graph</span>
+                            <a href="/tags/Git/">
+                                <span class="chip bg-color">Git</span>
                             </a>
                         
                     </div>
@@ -379,8 +371,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Algorithm/" class="post-category">
-                                Algorithm
+                            <a href="/categories/Version-Control/" class="post-category">
+                                Version Control
                             </a>
                         
                     </div>
@@ -392,7 +384,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-08-15
+                    2020-08-22
                 </div>
                 
 
@@ -408,10 +400,33 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>A* is a static path search algorithm which is used to find the shortest path from the source (S) to the goal (G) from a finite weighted graph. The math representation of A* is<br>$$f(n) = c(n) + h(n) $$</p>
-<p>Some people may prefer using $g$ instead of $c$ to indicate the cost function. And the $h$ is a heuristic function. More information can be found from the original <a target="_blank" rel="noopener" href="https://ai.stanford.edu/~nilsson/OnlinePubs-Nils/PublishedPapers/astar.pdf">paper</a>.</p>
-<p>So let’s get back to the title, how about the admissibility of A*? Well, as we can guess, it actually relies on the heuristic function. Again, A* algorithm requires the $h$ should be a ‘good’ estimation or ‘admissible’. It means that it has to be no longer than the actual distance. But if $h$ has no meaning, e.g. 0, then it is BFS. An example in real life is letting $h$ be the Euclidean distance from the node to the goal in navigation. But what does it do with the optimality? Here’s a simplified math proof – proof by contradiction:</p>
-<p>Say all previous states till $n$ have optimal cost values already. For the next state till $n’$ we would have $f(n’)=c(n’)+h(n’)$ which is minimum among states in OPEN list. But let’s assume $g(n’)$ itself is actually suboptimal,  that means there has to be at least one state $n’^*$ on an optimal path from S that is in OPEN,<br>$$c(n’^*) + h(n’^*) \geq  c(n’) + h(n’)  \qquad  (1)(\text{min})$$<br>meaning on the same time we have<br>$$c(n’^*) + \delta(n’^*, n’) &lt;  c(n’) \qquad  (2)(\text{assumption})$$<br>Rewrite (2) can give us<br>$$c(n’^*) + \delta(n’^*, n’) + h(n’) &lt;  c(n’) + h(n’) \qquad  (3) $$<br>As $h$ is admissible, we have<br>$$h(n’^*) +   \delta(n’^*, n’) &lt; h(n’) \qquad (4) (<br>\text{underestimate}) $$<br>So (3) would be<br>$$ c(n’^*) + h(n’^*) &lt; c(n’) + h(n’)$$<br>which is contradictory with (1), so $c(n)$ must be optimal.</p>
+                <h1 id="Git-Upstreams-amp-Submodules"><a href="#Git-Upstreams-amp-Submodules" class="headerlink" title="Git Upstreams &amp; Submodules"></a>Git Upstreams &amp; Submodules</h1><h2 id="Upstreams"><a href="#Upstreams" class="headerlink" title="Upstreams"></a>Upstreams</h2><p>Sometimes you may encounter such a situation. You want to fork some projects and stay updated to those projects, but in the meantime you want to do some personal modifications. However, you don’t want to send those personal changes back to those upstreams (e.g those changes contain your personal information) and you want to make your forked repositories <strong>private</strong> (but you can’t with forking). Now all you need is git upstreams.</p>
+<p>To make things simply, let’s say there is one repository on github called <code>A</code>, the first thing you wanna do is create a new empty repository <code>B</code> in your github, record the <code>&lt;urlB&gt;</code> of your repo. Then clone repo <code>A</code> to your local machine as usual:</p>
+<pre class=" language-sh"><code class="language-sh">$ git clone <urlA> repoName
+$ cd repoName</code></pre>
+<p>Make the origin of this <code>repoName</code>  upstream:</p>
+<pre class=" language-sh"><code class="language-sh">$ git remote rename origin upstream</code></pre>
+<p>Use your <code>&lt;urlA&gt;</code> and add your <code>repoName</code> to this url:</p>
+<pre class=" language-sh"><code class="language-sh">$ git remote add origin <urlB></code></pre>
+<p>Then you can push changes back to your repo <code>B</code>:</p>
+<pre class=" language-sh"><code class="language-sh">$ git push origin master</code></pre>
+<p>Till now, you successfully make <code>A</code> as upstream and <code>B</code> as the origin. Next time you want to update your <code>B</code> to <code>A</code>, all you need to do is:</p>
+<pre class=" language-sh"><code class="language-sh">$ git pull upstream master && git push origin master</code></pre>
+<p>Deal with those conflicts (if any) and then your private repo <code>B</code> is up to date with <code>A</code> but have your own modications as well.</p>
+<h2 id="Submodules"><a href="#Submodules" class="headerlink" title="Submodules"></a>Submodules</h2><p>Now let’s you actually have a larger project <code>C</code> of which the <code>B</code> above is a part. In other words, you have two remote repos <code>C</code> and <code>B</code> since you want <code>B</code> updated with <code>A</code> as mentioned above. So <code>B</code> is in fact a submodule under <code>C</code>. This will cause some new issues, in fact. If you do nothing and try <code>git commit</code> the changes under <code>B</code> you will encounter warnings (<code> Changes not staged for commit</code>) and the changes are actually not commited. To solve this, you need to make <code>B</code> as submodule of <code>C</code> and pull/push two repos independently.</p>
+<pre class=" language-sh"><code class="language-sh">$ cd /path/to/local/B
+$ git submodule add <urlB></code></pre>
+<p>A common practice is when you finish your changes to <code>B</code> and <code>C</code>, go to the path of <code>B</code> and push those changes to repoB first:</p>
+<pre class=" language-sh"><code class="language-sh">$ cd /path/to/local/B
+$ git add .
+$ git commit -m "commitMsg"
+$ git push origin master</code></pre>
+<p>Then go back to the root of <code>C</code> and push changes:</p>
+<pre class=" language-sh"><code class="language-sh">$ cd /path/to/local/C
+$ git add .
+$ git commit -m "commitMsg"
+$ git push origin master</code></pre>
+<p>If you have multiple submodules and you want to push changes of everything at one time (normally I don’t do it this way), you may want to take a look <a target="_blank" rel="noopener" href="https://www.vogella.com/tutorials/GitSubmodules/article.html">here</a>.</p>
 <script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
@@ -455,7 +470,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://chujiechen.github.io/2020/08/15/admissibility-of-a/">https://chujiechen.github.io/2020/08/15/admissibility-of-a/</a>
+                    <a href="https://chujiechen.github.io/2020/08/22/git-upstream-submodule/">https://chujiechen.github.io/2020/08/22/git-upstream-submodule/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -493,16 +508,8 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Math/">
-                                    <span class="chip bg-color">Math</span>
-                                </a>
-                            
-                                <a href="/tags/Algorithm/">
-                                    <span class="chip bg-color">Algorithm</span>
-                                </a>
-                            
-                                <a href="/tags/Graph/">
-                                    <span class="chip bg-color">Graph</span>
+                                <a href="/tags/Git/">
+                                    <span class="chip bg-color">Git</span>
                                 </a>
                             
                         </div>
@@ -673,7 +680,7 @@
         repo: 'chujiechen.github.io',
         owner: 'ChujieChen',
         admin: ["ChujieChen"],
-        id: '2020-08-15T22-19-36',
+        id: '2020-08-22T22-07-47',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -697,9 +704,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
                 <a href="/2020/08/22/git-upstream-submodule/">
                     <div class="card-image">
@@ -716,9 +724,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-22
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-22
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -731,6 +739,7 @@
                         </span>
                     </div>
                 </div>
+
                 
                 <div class="card-action article-tags">
                     
@@ -746,7 +755,7 @@
         
         <div class="article col s12 m6" data-aos="fade-up">
             <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
                 <a href="/2020/08/15/admissibility-of-a/">
@@ -779,7 +788,6 @@
                         </span>
                     </div>
                 </div>
-
                 
                 <div class="card-action article-tags">
                     
@@ -930,13 +938,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
-    });
-</script>
 
 
 

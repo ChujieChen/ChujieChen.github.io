@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chujiechen.github.io/"/>
-  <updated>2020-08-16T03:28:55.641Z</updated>
+  <updated>2020-08-23T02:29:41.284Z</updated>
   <id>https://chujiechen.github.io/</id>
   
   <author>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Does A* always return an optimal path?</title>
-    <link href="https://chujiechen.github.io/2020/08/15/admissibility-of-a/"/>
-    <id>https://chujiechen.github.io/2020/08/15/admissibility-of-a/</id>
-    <published>2020-08-16T02:19:36.000Z</published>
-    <updated>2020-08-16T03:28:55.641Z</updated>
+    <title>Git Upstreams &amp; Submodules</title>
+    <link href="https://chujiechen.github.io/2020/08/22/git-upstream-submodule/"/>
+    <id>https://chujiechen.github.io/2020/08/22/git-upstream-submodule/</id>
+    <published>2020-08-23T02:07:47.000Z</published>
+    <updated>2020-08-23T02:29:41.284Z</updated>
     
     <summary type="html">
     
@@ -29,7 +29,34 @@
       
         
         
-          &lt;p&gt;So A* is a static path search algorithm which is used to find the shortest path from the source (S) to the goal (G) from a finite
+          &lt;h1 id=&quot;Git-Upstreams-amp-Submodules&quot;&gt;&lt;a href=&quot;#Git-Upstreams-amp-Submodules&quot; class=&quot;headerlink&quot; title=&quot;Git Upstreams &amp;amp;
+        
+      
+    
+    </summary>
+    
+    
+      <category term="Version Control" scheme="https://chujiechen.github.io/categories/Version-Control/"/>
+    
+    
+      <category term="Git" scheme="https://chujiechen.github.io/tags/Git/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Does A* always return an optimal path?</title>
+    <link href="https://chujiechen.github.io/2020/08/15/admissibility-of-a/"/>
+    <id>https://chujiechen.github.io/2020/08/15/admissibility-of-a/</id>
+    <published>2020-08-16T02:19:36.000Z</published>
+    <updated>2020-08-23T02:30:10.164Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;A* is a static path search algorithm which is used to find the shortest path from the source (S) to the goal (G) from a finite weighted
         
       
     
