@@ -327,6 +327,8 @@ header .brand-logo .logo-span {
 /*修改顶部 logo 的文字垂直对齐为 top，避免默认 middle 看起来偏下*/
 header .brand-logo .waves-effect {
     vertical-align: top;
+    /* 解决了顶部logo文字太长会自动换行的问题 */
+    width: max-content;
 }
 
 header .button-collapse i {
