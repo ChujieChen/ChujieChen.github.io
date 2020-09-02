@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Does A* always return an optimal path?, Black Vinegar">
+    <meta name="keywords" content="A Glance at State Hooks in React, Black Vinegar">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Does A* always return an optimal path? | Black Vinegar</title>
+    <title>A Glance at State Hooks in React | Black Vinegar</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -237,12 +237,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://www.growingwiththeweb.com/images/2012/06/03/demo.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://miro.medium.com/max/3158/1*kEPCQNY4dwVyaFuLEwJcNQ.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Does A* always return an optimal path?</h1>
+                    <h1 class="description center-align post-title">A Glance at State Hooks in React</h1>
                 </div>
             </div>
         </div>
@@ -359,16 +359,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Math/">
-                                <span class="chip bg-color">Math</span>
+                            <a href="/tags/Front-End/">
+                                <span class="chip bg-color">Front End</span>
                             </a>
                         
-                            <a href="/tags/Algorithm/">
-                                <span class="chip bg-color">Algorithm</span>
-                            </a>
-                        
-                            <a href="/tags/Graph/">
-                                <span class="chip bg-color">Graph</span>
+                            <a href="/tags/React-js/">
+                                <span class="chip bg-color">React.js</span>
                             </a>
                         
                     </div>
@@ -379,8 +375,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Algorithm/" class="post-category">
-                                Algorithm
+                            <a href="/categories/Web-Development/" class="post-category">
+                                Web Development
                             </a>
                         
                     </div>
@@ -392,7 +388,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-08-15
+                    2020-09-01
                 </div>
                 
 
@@ -408,11 +404,91 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>A* is a static path search algorithm which is used to find the shortest path from the source (S) to the goal (G) from a finite weighted graph. The math representation of A* is<br>$$f(n) = c(n) + h(n) $$</p>
-<p>Some people may prefer using $g$ instead of $c$ to indicate the cost function. And the $h$ is a heuristic function. More information can be found from the original <a target="_blank" rel="noopener" href="https://ai.stanford.edu/~nilsson/OnlinePubs-Nils/PublishedPapers/astar.pdf">paper</a>.</p>
-<p>So let’s get back to the title, how about the admissibility of A*? Well, as we can guess, it actually relies on the heuristic function. Again, A* algorithm requires the $h$ should be a ‘good’ estimation or ‘admissible’. It means that it has to be no longer than the actual distance. But if $h$ has no meaning, e.g. 0, then it is BFS. An example in real life is letting $h$ be the Euclidean distance from the node to the goal in navigation. But what does it do with the optimality? Here’s a simplified math proof – proof by contradiction:</p>
-<p>Say all previous states till $n$ have optimal cost values already. For the next state till $n’$ we would have $f(n’)=c(n’)+h(n’)$ which is minimum among states in OPEN list. But let’s assume $g(n’)$ itself is actually suboptimal,  that means there has to be at least one state $n’^*$ on an optimal path from S that is in OPEN,<br>$$c(n’^*) + h(n’^*) \geq  c(n’) + h(n’)  \qquad  (1)(\text{min})$$<br>meaning on the same time we have<br>$$c(n’^*) + \delta(n’^*, n’) &lt;  c(n’) \qquad  (2)(\text{assumption})$$<br>Rewrite (2) can give us<br>$$c(n’^*) + \delta(n’^*, n’) + h(n’) &lt;  c(n’) + h(n’) \qquad  (3) $$<br>As $h$ is admissible, we have<br>$$h(n’^*) +   \delta(n’^*, n’) &lt; h(n’) \qquad (4) (<br>\text{underestimate}) $$<br>So (3) would be<br>$$ c(n’^*) + h(n’^*) &lt; c(n’) + h(n’)$$<br>which is contradictory with (1), so $c(n)$ must be optimal.</p>
+                <h1 id="A-Glance-at-State-Hooks-in-React"><a href="#A-Glance-at-State-Hooks-in-React" class="headerlink" title="A Glance at State Hooks in React"></a>A Glance at State Hooks in React</h1><h2 id="Hooks-vs-Class-Components"><a href="#Hooks-vs-Class-Components" class="headerlink" title="Hooks vs. Class Components"></a>Hooks vs. Class Components</h2><p>Hooks make your react code look simpler. Take a counter program as an example.<br>Using class components:</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> React <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
 
+<span class="token keyword">class</span> <span class="token class-name">ClassComponent</span> <span class="token keyword">extends</span> <span class="token class-name">React<span class="token punctuation">.</span>Component</span> <span class="token punctuation">{</span>
+  <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">super</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>state <span class="token operator">=</span> <span class="token punctuation">{</span>
+      count<span class="token operator">:</span> <span class="token number">0</span>
+    <span class="token punctuation">}</span><span class="token punctuation">;</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span>increase <span class="token operator">=</span> <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">increase</span><span class="token punctuation">.</span><span class="token function">bind</span><span class="token punctuation">(</span><span class="token keyword">this</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">increase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">this</span><span class="token punctuation">.</span><span class="token function">setState</span><span class="token punctuation">(</span><span class="token punctuation">{</span> count<span class="token operator">:</span> <span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>count <span class="token operator">+</span> <span class="token number">1</span> <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token function">render</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token punctuation">(</span>
+      <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>state<span class="token punctuation">.</span>count<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+        <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span><span class="token keyword">this</span><span class="token punctuation">.</span>increase<span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token operator">+</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+    <span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> ClassComponent<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>But with hooks, one can import <code>useState</code> first and instead of creating a class.</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> useState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">FunctionalComponent</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>count<span class="token punctuation">,</span> setCount<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+  <span class="token keyword">function</span> <span class="token function">increase</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">setCount</span><span class="token punctuation">(</span>count <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span><span class="token punctuation">{</span>count<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>increase<span class="token punctuation">}</span><span class="token operator">&gt;</span><span class="token operator">+</span><span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> FunctionalComponent<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<p>Hooks provide a more direct API to the React concepts like props, state, context, refs, and lifecycle. There are a variety of hooks available: 1. that can store data (e.g. <code>useState</code>,<code>useReducer</code>) and connect data with lifecycle; 2. that can provide some memory functionality (e.g. <code>useMemo</code>,<code>useCallback</code>) so we can store some values in the previous execution; 3. that can provide more control (e.g. <code>useEffect</code>,<code>useRef</code>, <code>useContext</code>) so we have a extensive access and control inside React.</p>
+<h2 id="Example-Clock-with-State-Hooks"><a href="#Example-Clock-with-State-Hooks" class="headerlink" title="Example: Clock with State Hooks"></a>Example: Clock with State Hooks</h2><p>Here is an example using state hooks to update a clock every one second. with <code>setInterval(updateTime, 1000);</code>. The <code>const [time, setTime]</code> line follows the JavaScript syntax called array destructuring. One can think the <code>time</code> as <code>this.state.time</code> and <code>setTime</code> as <code>this.setState</code> in a class.</p>
+<pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token keyword">import</span> React<span class="token punctuation">,</span> <span class="token punctuation">{</span> useState <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">"react"</span><span class="token punctuation">;</span>
+
+<span class="token keyword">function</span> <span class="token function">App</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">setInterval</span><span class="token punctuation">(</span>updateTime<span class="token punctuation">,</span> <span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token punctuation">[</span>time<span class="token punctuation">,</span> setTime<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toLocaleTimeString</span><span class="token punctuation">(</span><span class="token string">"en-GB"</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token keyword">function</span> <span class="token function">updateTime</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">const</span> newTime <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Date</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">toLocaleTimeString</span><span class="token punctuation">(</span><span class="token string">"en-GB"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">setTime</span><span class="token punctuation">(</span>newTime<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> <span class="token punctuation">(</span>
+    <span class="token operator">&lt;</span>div className<span class="token operator">=</span><span class="token string">"container"</span><span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>h1<span class="token operator">&gt;</span><span class="token punctuation">{</span>time<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>h1<span class="token operator">&gt;</span>
+      <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>updateTime<span class="token punctuation">}</span><span class="token operator">&gt;</span>Get Time<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+  <span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">default</span> App<span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<script>
+        document.querySelectorAll('.github-emoji')
+          .forEach(el => {
+            if (!el.dataset.src) { return; }
+            const img = document.createElement('img');
+            img.style = 'display:none !important;';
+            img.src = el.dataset.src;
+            img.addEventListener('error', () => {
+              img.remove();
+              el.style.color = 'inherit';
+              el.style.backgroundImage = 'none';
+              el.style.background = 'none';
+            });
+            img.addEventListener('load', () => {
+              img.remove();
+            });
+            document.body.appendChild(img);
+          });
+      </script>
             </div>
             <hr/>
 
@@ -427,7 +503,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="/about" rel="external nofollow noreferrer">Chujie Chen</a>
+                    <a href="/about" rel="external nofollow noreferrer">Chuje Chen</a>
                 </span>
             </div>
             <div class="reprint__type">
@@ -437,7 +513,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://chujiechen.github.io/2020/08/15/admissibility-of-a/">https://chujiechen.github.io/2020/08/15/admissibility-of-a/</a>
+                    <a href="https://chujiechen.github.io/2020/09/01/a-glance-at-state-hooks-in-react/">https://chujiechen.github.io/2020/09/01/a-glance-at-state-hooks-in-react/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -450,7 +526,7 @@
                     All articles in this blog are used except for special statements
                     <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
                     reprint polocy. If reproduced, please indicate source
-                    <a href="/about" target="_blank">Chujie Chen</a>
+                    <a href="/about" target="_blank">Chuje Chen</a>
                     !
                 </span>
             </div>
@@ -475,16 +551,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Math/">
-                                    <span class="chip bg-color">Math</span>
+                                <a href="/tags/Front-End/">
+                                    <span class="chip bg-color">Front End</span>
                                 </a>
                             
-                                <a href="/tags/Algorithm/">
-                                    <span class="chip bg-color">Algorithm</span>
-                                </a>
-                            
-                                <a href="/tags/Graph/">
-                                    <span class="chip bg-color">Graph</span>
+                                <a href="/tags/React-js/">
+                                    <span class="chip bg-color">React.js</span>
                                 </a>
                             
                         </div>
@@ -655,7 +727,7 @@
         repo: 'chujiechen.github.io',
         owner: 'ChujieChen',
         admin: ["ChujieChen"],
-        id: '2020-08-15T22-19-36',
+        id: '2020-09-01T21-30-46',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -679,9 +751,63 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
+            <div class="card">
+                <a href="/2020/09/01/a-glance-at-state-hooks-in-react/">
+                    <div class="card-image">
+                        
+                        <img src="https://miro.medium.com/max/3158/1*kEPCQNY4dwVyaFuLEwJcNQ.png" class="responsive-img" alt="A Glance at State Hooks in React">
+                        
+                        <span class="card-title">A Glance at State Hooks in React</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            A brief example using React state hooks
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-09-01
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/Web-Development/" class="post-category">
+                                    Web Development
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Front-End/">
+                        <span class="chip bg-color">Front End</span>
+                    </a>
+                    
+                    <a href="/tags/React-js/">
+                        <span class="chip bg-color">React.js</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
             <div class="card">
                 <a href="/2020/08/22/git-upstream-submodule/">
                     <div class="card-image">
@@ -698,9 +824,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-22
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-22
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
@@ -718,63 +844,6 @@
                     
                     <a href="/tags/Git/">
                         <span class="chip bg-color">Git</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/08/15/admissibility-of-a/">
-                    <div class="card-image">
-                        
-                        <img src="https://www.growingwiththeweb.com/images/2012/06/03/demo.png" class="responsive-img" alt="Does A* always return an optimal path?">
-                        
-                        <span class="card-title">Does A* always return an optimal path?</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            I haven't used the A* algorithm for a long time. The last time I used it was for homework. Can the A* algorithm always return the shortest path? -- it's a question made me wonder yesterday, and below are some short reviews about it.
-                        
-                    </div>
-                    <div class="publish-info">
-                            <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-15
-                            </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Algorithm/" class="post-category">
-                                    Algorithm
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Math/">
-                        <span class="chip bg-color">Math</span>
-                    </a>
-                    
-                    <a href="/tags/Algorithm/">
-                        <span class="chip bg-color">Algorithm</span>
-                    </a>
-                    
-                    <a href="/tags/Graph/">
-                        <span class="chip bg-color">Graph</span>
                     </a>
                     
                 </div>
@@ -912,13 +981,6 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
-    });
-</script>
 
 
 
