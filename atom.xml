@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chujiechen.github.io/"/>
-  <updated>2020-09-02T02:28:17.762Z</updated>
+  <updated>2020-09-03T01:03:28.301Z</updated>
   <id>https://chujiechen.github.io/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://chujiechen.github.io/2020/09/01/a-glance-at-state-hooks-in-react/"/>
     <id>https://chujiechen.github.io/2020/09/01/a-glance-at-state-hooks-in-react/</id>
     <published>2020-09-02T01:30:46.000Z</published>
-    <updated>2020-09-02T02:28:17.762Z</updated>
+    <updated>2020-09-03T01:03:28.301Z</updated>
     
     <summary type="html">
     
@@ -36,12 +36,12 @@
     </summary>
     
     
-      <category term="Web Development" scheme="https://chujiechen.github.io/categories/Web-Development/"/>
+      <category term="Front End" scheme="https://chujiechen.github.io/categories/Front-End/"/>
     
-    
-      <category term="Front End" scheme="https://chujiechen.github.io/tags/Front-End/"/>
     
       <category term="React.js" scheme="https://chujiechen.github.io/tags/React-js/"/>
+    
+      <category term="Web Development" scheme="https://chujiechen.github.io/tags/Web-Development/"/>
     
   </entry>
   
@@ -50,7 +50,7 @@
     <link href="https://chujiechen.github.io/2020/08/22/git-upstream-submodule/"/>
     <id>https://chujiechen.github.io/2020/08/22/git-upstream-submodule/</id>
     <published>2020-08-23T02:07:47.000Z</published>
-    <updated>2020-09-02T02:03:56.990Z</updated>
+    <updated>2020-09-03T01:02:09.090Z</updated>
     
     <summary type="html">
     
@@ -65,10 +65,12 @@
     </summary>
     
     
-      <category term="Version Control" scheme="https://chujiechen.github.io/categories/Version-Control/"/>
+      <category term="Tool" scheme="https://chujiechen.github.io/categories/Tool/"/>
     
     
       <category term="Git" scheme="https://chujiechen.github.io/tags/Git/"/>
+    
+      <category term="Version control" scheme="https://chujiechen.github.io/tags/Version-control/"/>
     
   </entry>
   
