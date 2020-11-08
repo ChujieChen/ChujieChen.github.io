@@ -239,7 +239,7 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://www.codesdope.com/staticroot/images/ds/splay12.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://www.growingwiththeweb.com/images/data-structures/splay-tree/zig-zag-left.svg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
@@ -402,8 +402,8 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>A <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Splay_tree">splay tree</a> is a self-balancing binary search tree. It performs operations such as insertion, look-up and removal in O(log n) amortized time. The splay tree moves recently accessed elements to the root by splaying, so if the element can be reached again in O(1) time.</p>
-<p>A fullly-fledged splay tree involves such operations:</p>
+                <p>A <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Splay_tree">splay tree</a> is a self-balancing binary search tree. It performs operations such as insertion, look-up and removal in O(log n) amortized time. The splay tree moves recently accessed elements to the root by splaying, so if the element is queried again it can be reached in O(1) time.</p>
+<p>A fully-fledged splay tree involves such operations:</p>
 <ul>
 <li>Splay: moving the recently accessed nodes to the root through a series of rotations below based on different situation<ul>
 <li>Zig</li>
@@ -412,13 +412,13 @@
 </ul>
 </li>
 <li>Join: merging two subtrees</li>
-<li>Split: spliting one tree into two subtrees</li>
+<li>Split: splitting one tree into two subtrees</li>
 <li>Insert: add an element</li>
 <li>Delete: remove an element</li>
 <li>Find: look up an element</li>
 </ul>
 <p>A good visualization can be found <a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/SplayTree.html">here</a>. More details about splay trees and above operations can be found on <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Splay_tree">Wikipedia</a>. Here I use an example called <strong>Set with range sums</strong> to show the application of splay trees.</p>
-<h2 id="Set-with-range-sums"><a href="#Set-with-range-sums" class="headerlink" title="Set with range sums."></a>Set with range sums.</h2><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Implement a data structure that stores a set 𝑆 of integers with the following allowed operations:</p>
+<h2 id="Set-with-Range-Sums"><a href="#Set-with-Range-Sums" class="headerlink" title="Set with Range Sums"></a>Set with Range Sums</h2><h3 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h3><p>Implement a data structure that stores a set 𝑆 of integers with the following allowed operations:</p>
 <ul>
 <li><strong>add(𝑖)</strong> — add integer 𝑖 into the set 𝑆 (if it was there already, the set doesn’t change).</li>
 <li><strong>del(𝑖)</strong> — remove integer 𝑖 from the set 𝑆 (if there was no such element, nothing happens).</li>
@@ -439,10 +439,12 @@
 <li>“? i” means <strong>find</strong>((𝑖 + 𝑥) mod 𝑀),  </li>
 <li>“s l r” means <strong>sum</strong>((𝑙+𝑥) mod 𝑀, (𝑟 + 𝑥) mod 𝑀).</li>
 </ul>
-<p>Constraints. $1 \leq n \leq 100 000$; $0 \leq i \leq 10^9$.</p>
+<p>Constraints. $$1 \leq n \leq 100 000$$; $$0 \leq i \leq 10^9$$.</p>
 <hr>
 <p>This is typical problem that needs a splay tree if you care about the efficiency, as we can use the <strong>Split</strong> to get the range sum and <strong>Join</strong> two subtrees back to restore the structure.</p>
-<h1 id="TO-BE-CONTINUED…"><a href="#TO-BE-CONTINUED…" class="headerlink" title="TO BE CONTINUED…"></a>TO BE CONTINUED…</h1><script>
+<h3 id="Thoughts"><a href="#Thoughts" class="headerlink" title="Thoughts"></a>Thoughts</h3><p>The idea is each <strong>Vertex</strong> (TreeNode) has a <strong>key</strong> representing an integer, a <strong>sum</strong> recording the sum of all the keys in the subtree, a <strong>left</strong> pointing to its left child vertex, a <strong>right</strong> pointing to its right child vertex, and a <strong>parent</strong> pointing to its parent vertex. Note that the <strong>sum</strong> is not static, but will constantly change as the splay tree changes.</p>
+<p>With this design, <strong>add</strong> would just be Insert a vertex; <strong>del</strong> is the same as Delete; <strong>find</strong> equals Find. How about <strong>sum</strong>? Well,</p>
+<h2 id="To-Be-Continued…"><a href="#To-Be-Continued…" class="headerlink" title="To Be Continued…"></a>To Be Continued…</h2><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -695,7 +697,7 @@
         repo: 'chujiechen.github.io',
         owner: 'ChujieChen',
         admin: ["ChujieChen"],
-        id: '2020-09-12T17-33-53',
+        id: '2020-09-12T20-33-53',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -727,7 +729,7 @@
                 <a href="/2020/09/12/set-with-range-sums-using-splay-tree/">
                     <div class="card-image">
                         
-                        <img src="https://www.codesdope.com/staticroot/images/ds/splay12.png" class="responsive-img" alt="Set with Range Sums using Splay Tree">
+                        <img src="https://www.growingwiththeweb.com/images/data-structures/splay-tree/zig-zag-left.svg" class="responsive-img" alt="Set with Range Sums using Splay Tree">
                         
                         <span class="card-title">Set with Range Sums using Splay Tree</span>
                     </div>
@@ -949,6 +951,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
 
 
 
