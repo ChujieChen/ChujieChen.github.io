@@ -420,40 +420,22 @@ $ cd repoName<span aria-hidden="true" class="line-numbers-rows"><span></span><sp
 <pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ git pull upstream master &amp;&amp; git push origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>Deal with those conflicts (if any) and then your private repo <code>B</code> is up to date with <code>A</code> but also have your own modifications as well.</p>
 <h2 id="Submodules"><a href="#Submodules" class="headerlink" title="Submodules"></a>Submodules</h2><p>Now let’s say you actually have a larger project <code>C</code> of which the <code>B</code> above is a part. In other words, you have two remote repos <code>C</code> and <code>B</code> and you want <code>B</code> updated with <code>A</code> as mentioned above. So <code>B</code> is in fact a submodule under <code>C</code>. This will cause some new issues, in fact. If you do nothing and try <code>git commit</code> the changes of <code>B</code> under <code>C</code> you will encounter warnings (<code>Changes not staged for commit</code>) and the changes are actually not commited. To solve this, you need to make <code>B</code> as submodule of <code>C</code> and pull/push two repos independently.</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ cd /path/to/local/B
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ cd &#x2F;path&#x2F;to&#x2F;local&#x2F;B
 $ git submodule add &lt;urlB&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>A common practice is when you finish your changes to <code>B</code> and <code>C</code>, go to the path of <code>B</code> and push those changes to repoB first:</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ cd /path/to/local/B
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ cd &#x2F;path&#x2F;to&#x2F;local&#x2F;B
 $ git add .
-$ git commit -m "commitMsg"
+$ git commit -m &quot;commitMsg&quot;
 $ git push origin master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>Then go back to the root of <code>C</code> and push changes:</p>
-<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ cd /path/to/local/C
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">$ cd &#x2F;path&#x2F;to&#x2F;local&#x2F;C
 $ git add .
-$ git commit -m "commitMsg"
+$ git commit -m &quot;commitMsg&quot;
 $ git push origin master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>If you have multiple submodules and you want to push changes of everything at one time (normally I don’t do it this way), you may want to take a look <a target="_blank" rel="noopener" href="https://www.vogella.com/tutorials/GitSubmodules/article.html">here</a>.</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr/>
 

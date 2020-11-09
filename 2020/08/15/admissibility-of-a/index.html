@@ -410,25 +410,7 @@
 <p>Some people may prefer using $g$ instead of $c$ to indicate the cost function. And the $h$ is a heuristic function. More information can be found from the original <a target="_blank" rel="noopener" href="https://ai.stanford.edu/~nilsson/OnlinePubs-Nils/PublishedPapers/astar.pdf">paper</a>.</p>
 <p>So let’s get back to the title, how about the admissibility of A*? Well, as we can guess, it actually relies on the heuristic function. Again, A* algorithm requires the $h$ should be a ‘good’ estimation or ‘admissible’. It means that it has to be no longer than the actual distance. But if $h$ has no meaning, e.g. 0, then it is BFS. An example in real life is letting $h$ be the Euclidean distance from the node to the goal in navigation. But what does it do with the optimality? Here’s a simplified math proof – proof by contradiction:</p>
 <p>Say all previous states till $n$ have optimal cost values already. For the next state till $n’$ we would have $f(n’)=c(n’)+h(n’)$ which is minimum among states in OPEN list. But let’s assume $g(n’)$ itself is actually suboptimal,  that means there has to be at least one state $n’^*$ on an optimal path from S that is in OPEN,<br>$$c(n’^*) + h(n’^*) \geq  c(n’) + h(n’)  \qquad  (1)(\text{min})$$<br>meaning on the same time we have<br>$$c(n’^*) + \delta(n’^*, n’) &lt;  c(n’) \qquad  (2)(\text{assumption})$$<br>Rewrite (2) can give us<br>$$c(n’^*) + \delta(n’^*, n’) + h(n’) &lt;  c(n’) + h(n’) \qquad  (3) $$<br>As $h$ is admissible, we have<br>$$h(n’^*) +   \delta(n’^*, n’) &lt; h(n’) \qquad (4) (<br>\text{underestimate}) $$<br>So (3) would be<br>$$ c(n’^*) + h(n’^*) &lt; c(n’) + h(n’)$$<br>which is contradictory with (1), so $c(n)$ must be optimal.</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
             </div>
             <hr/>
 
