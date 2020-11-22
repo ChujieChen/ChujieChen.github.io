@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chujiechen.github.io/"/>
-  <updated>2020-11-22T08:29:25.797Z</updated>
+  <updated>2020-11-22T08:42:07.308Z</updated>
   <id>https://chujiechen.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>A Matrix-Factorization-Based Recommendation System</title>
+    <link href="https://chujiechen.github.io/2020/11/22/a-matrix-factorization-based-recommendation-system/"/>
+    <id>https://chujiechen.github.io/2020/11/22/a-matrix-factorization-based-recommendation-system/</id>
+    <published>2020-11-22T08:33:22.000Z</published>
+    <updated>2020-11-22T08:42:07.308Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Personalized recommendation systems are popular business applications of machine learning.&lt;/p&gt;
+&lt;h1 id=&quot;To-Be-Continued…&quot;&gt;&lt;a
+        
+      
+    
+    </summary>
+    
+    
+      <category term="AI" scheme="https://chujiechen.github.io/categories/AI/"/>
+    
+    
+      <category term="Matlab" scheme="https://chujiechen.github.io/tags/Matlab/"/>
+    
+      <category term="Machine learning" scheme="https://chujiechen.github.io/tags/Machine-learning/"/>
+    
+  </entry>
   
   <entry>
     <title>Set with Range Sums using Splay Tree</title>

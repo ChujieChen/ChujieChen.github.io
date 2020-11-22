@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>A Matrix-Factorization-Based Recommendation System</title>
+      <link href="/2020/11/22/a-matrix-factorization-based-recommendation-system/"/>
+      <url>/2020/11/22/a-matrix-factorization-based-recommendation-system/</url>
+      
+        <content type="html"><![CDATA[<p>Personalized recommendation systems are popular business applications of machine learning.</p><h1 id="To-Be-Continued…"><a href="#To-Be-Continued…" class="headerlink" title="To Be Continued…"></a>To Be Continued…</h1><script>        document.querySelectorAll('.github-emoji')          .forEach(el => {            if (!el.dataset.src) { return; }            const img = document.createElement('img');            img.style = 'display:none !important;';            img.src = el.dataset.src;            img.addEventListener('error', () => {              img.remove();              el.style.color = 'inherit';              el.style.backgroundImage = 'none';              el.style.background = 'none';            });            img.addEventListener('load', () => {              img.remove();            });            document.body.appendChild(img);          });      </script>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Matlab </tag>
+            
+            <tag> Machine learning </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>Set with Range Sums using Splay Tree</title>
       <link href="/2020/09/12/set-with-range-sums-using-splay-tree/"/>
       <url>/2020/09/12/set-with-range-sums-using-splay-tree/</url>
