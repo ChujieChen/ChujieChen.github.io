@@ -29,10 +29,10 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Black Vinegar" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
-<script src="/js/prism-line-numbers.min.js"></script></head>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Black Vinegar" type="application/atom+xml">
+</head>
+
+
 
 
 <body>
@@ -287,8 +287,7 @@
     }
 
     .toc-widget .toc-title {
-        margin: 35px 0 15px 0;
-        padding-left: 17px;
+        padding: 35px 0 15px 17px;
         font-size: 1.5rem;
         font-weight: bold;
         line-height: 1.5rem;
@@ -300,7 +299,7 @@
     }
 
     #toc-content {
-        height: calc(100vh - 250px);
+        padding-bottom: 30px;
         overflow: auto;
     }
 
@@ -404,6 +403,14 @@
             </div>
         </div>
         <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Personalized recommendation systems are popular business applications of machine learning. Imagine given a set of ratings from Netflix users on many movies they have seen $(\text{ratings are from one star to five starts})$, how can we get a personalized rating predictor for a given user on unseen movies?</p>
@@ -424,61 +431,44 @@
 <p>where $lambda$ is a parameter which controls the importance of regularization terms. We can rewrite the gradient descent considering $(\text{take user profile as an instance})$:</p>
 <p>$$\frac{\partial E(U,V)}{\partial U_{u,k}} = -2 \sum_{v|(u,v)\in M}(M_{u,v} - \sum_{k=1}^r U_{u,k} V_{v,k}) * V_{v,k} + 2\lambda U_{u,k}$$</p>
 <p>so we have:<br>$$ U_{u,k} \leftarrow U_{u,k} + 2\mu \sum_{v|(u,v)\in M} (M_{u,v} - \sum_{k=1}^r U_{u,k} V_{v,k}) * V_{v,k} -  2\lambda U_{u,k}$$<br>and<br>$$ V_{v,k} \leftarrow V_{v,k} + 2\mu \sum_{v|(u,v)\in M} (M_{u,v} - \sum_{k=1}^r U_{u,k} V_{v,k}) * U_{u,k} - 2\lambda V_{v,k}$$</p>
-<h2 id="Coding-in-Matlab"><a href="#Coding-in-Matlab" class="headerlink" title="Coding in Matlab"></a>Coding in Matlab</h2><p>Let’s use the data set <a target="_blank" rel="noopener" href="https://github.com/ChujieChen/CSE_ISYE_6740_ComputationalDataAnalysis/raw/master/assigments/assignment3/movie_data.mat">movie_data.mat</a> as an example. The file contains the test set and a train set. The size of each set is $943 \times 1682$, i.e. 943 users and 1682 movies. Each value in the matrix can be 0: missing, or 1 - 5: ratings. The myRecommender.m is quite straightforward:</p>
-<pre class="line-numbers language-mathml" data-language="mathml"><code class="language-mathml">function [U, V] = myRecommender(rateMatrix, lowRank)
-    % Parameters
-    maxIter = 5e3; % Choose your own.
-    learningRate = 1e - 4; % Choose your own.
-    regularizer = 1e - 2; % Choose your own.
+<h2 id="Coding-in-Matlab"><a href="#Coding-in-Matlab" class="headerlink" title="Coding in Matlab"></a>Coding in Matlab</h2><p>Let’s use the data set <a target="_blank" rel="noopener" href="https://github.com/ChujieChen/CSE_ISYE_6740_ComputationalDataAnalysis/raw/master/assigments/assignment3/movie_data.mat">movie_data.mat</a> as an example. The file contains the test set and a train set. The size of each set is $943 \times 1682$, i.e. 943 users and 1682 movies. Each value in the matrix can be 0: missing, or 1 - 5: ratings. The <code>myRecommender.m</code> is quite straightforward:</p>
+<pre class="line-numbers language-matlab" data-language="matlab"><div class="caption"><span>myRecommender.m</span></div><code class="language-matlab"><span class="token keyword">function</span> <span class="token punctuation">[</span>U<span class="token punctuation">,</span> V<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">myRecommender</span><span class="token punctuation">(</span>rateMatrix<span class="token punctuation">,</span> lowRank<span class="token punctuation">)</span>
+    <span class="token comment">% Parameters</span>
+    maxIter <span class="token operator">=</span> <span class="token number">5e3</span><span class="token punctuation">;</span> <span class="token comment">% Choose your own.</span>
+    learningRate <span class="token operator">=</span> <span class="token number">1</span>e <span class="token operator">-</span> <span class="token number">4</span><span class="token punctuation">;</span> <span class="token comment">% Choose your own.</span>
+    regularizer <span class="token operator">=</span> <span class="token number">1</span>e <span class="token operator">-</span> <span class="token number">2</span><span class="token punctuation">;</span> <span class="token comment">% Choose your own.</span>
 
-    % Random initialization:
-    [n1, n2] = size(rateMatrix);
-    U = rand(n1, lowRank) / lowRank;
-    V = rand(n2, lowRank) / lowRank;
+    <span class="token comment">% Random initialization:</span>
+    <span class="token punctuation">[</span>n1<span class="token punctuation">,</span> n2<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">size</span><span class="token punctuation">(</span>rateMatrix<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    U <span class="token operator">=</span> <span class="token function">rand</span><span class="token punctuation">(</span>n1<span class="token punctuation">,</span> lowRank<span class="token punctuation">)</span> <span class="token operator">/</span> lowRank<span class="token punctuation">;</span>
+    V <span class="token operator">=</span> <span class="token function">rand</span><span class="token punctuation">(</span>n2<span class="token punctuation">,</span> lowRank<span class="token punctuation">)</span> <span class="token operator">/</span> lowRank<span class="token punctuation">;</span>
 
-    % Gradient Descent:
-    %% change of reconstruction error (see if it is converged) and iteration used to stop loop
-    deltaRecoError = 1e - 4 * nnz(rateMatrix &gt; 0);
-    recoError = Inf;
-    newRecoError = 5 * 5 * numel(rateMatrix);
-    it = 0;
-    %% update U and V
-    while abs(newRecoError - recoError) &gt; deltaRecoError &amp;&amp; it &lt; maxIter
-        recoError = newRecoError;
-        % note that if sum(Uuk*Vik) holds non-zero value for
-        % corresponding zero value Mui, we should not take it into account
-        % since we want UV to be similar to M as much as possible
-        U = U + 2 * learningRate * ((rateMatrix - U * V') .* (rateMatrix &gt; 0)) * V - 2 * learningRate * regularizer * U;
-        V = V + 2 * learningRate * ((rateMatrix - U * V') .* (rateMatrix &gt; 0))' * U - 2 * learningRate * regularizer * V;
-        % update the objective funtion
-        newRecoError = sumsqr((rateMatrix - U * V') .* (rateMatrix &gt; 0)) + regularizer * sumsqr(U) + regularizer * sumsqr(V);
-        it = it + 1;
-    end
-end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
+    <span class="token comment">% Gradient Descent:</span>
+    <span class="token comment">%% change of reconstruction error (see if it is converged) and iteration used to stop loop</span>
+    deltaRecoError <span class="token operator">=</span> <span class="token number">1</span>e <span class="token operator">-</span> <span class="token number">4</span> <span class="token operator">*</span> <span class="token function">nnz</span><span class="token punctuation">(</span>rateMatrix <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    recoError <span class="token operator">=</span> Inf<span class="token punctuation">;</span>
+    newRecoError <span class="token operator">=</span> <span class="token number">5</span> <span class="token operator">*</span> <span class="token number">5</span> <span class="token operator">*</span> <span class="token function">numel</span><span class="token punctuation">(</span>rateMatrix<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    it <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+    <span class="token comment">%% update U and V</span>
+    <span class="token keyword">while</span> <span class="token function">abs</span><span class="token punctuation">(</span>newRecoError <span class="token operator">-</span> recoError<span class="token punctuation">)</span> <span class="token operator">></span> deltaRecoError <span class="token operator">&amp;&amp;</span> it <span class="token operator">&lt;</span> maxIter
+        recoError <span class="token operator">=</span> newRecoError<span class="token punctuation">;</span>
+        <span class="token comment">% note that if sum(Uuk*Vik) holds non-zero value for</span>
+        <span class="token comment">% corresponding zero value Mui, we should not take it into account</span>
+        <span class="token comment">% since we want UV to be similar to M as much as possible</span>
+        U <span class="token operator">=</span> U <span class="token operator">+</span> <span class="token number">2</span> <span class="token operator">*</span> learningRate <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>rateMatrix <span class="token operator">-</span> U <span class="token operator">*</span> V<span class="token operator">'</span><span class="token punctuation">)</span> <span class="token operator">.*</span> <span class="token punctuation">(</span>rateMatrix <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">*</span> V <span class="token operator">-</span> <span class="token number">2</span> <span class="token operator">*</span> learningRate <span class="token operator">*</span> regularizer <span class="token operator">*</span> U<span class="token punctuation">;</span>
+        V <span class="token operator">=</span> V <span class="token operator">+</span> <span class="token number">2</span> <span class="token operator">*</span> learningRate <span class="token operator">*</span> <span class="token punctuation">(</span><span class="token punctuation">(</span>rateMatrix <span class="token operator">-</span> U <span class="token operator">*</span> V<span class="token operator">'</span><span class="token punctuation">)</span> <span class="token operator">.*</span> <span class="token punctuation">(</span>rateMatrix <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token operator">'</span> <span class="token operator">*</span> U <span class="token operator">-</span> <span class="token number">2</span> <span class="token operator">*</span> learningRate <span class="token operator">*</span> regularizer <span class="token operator">*</span> V<span class="token punctuation">;</span>
+        <span class="token comment">% update the objective funtion</span>
+        newRecoError <span class="token operator">=</span> <span class="token function">sumsqr</span><span class="token punctuation">(</span><span class="token punctuation">(</span>rateMatrix <span class="token operator">-</span> U <span class="token operator">*</span> V<span class="token operator">'</span><span class="token punctuation">)</span> <span class="token operator">.*</span> <span class="token punctuation">(</span>rateMatrix <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">+</span> regularizer <span class="token operator">*</span> <span class="token function">sumsqr</span><span class="token punctuation">(</span>U<span class="token punctuation">)</span> <span class="token operator">+</span> regularizer <span class="token operator">*</span> <span class="token function">sumsqr</span><span class="token punctuation">(</span>V<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        it <span class="token operator">=</span> it <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    <span class="token keyword">end</span>
+<span class="token keyword">end</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
 
 
 
-<h2 id="To-Be-Continued…"><a href="#To-Be-Continued…" class="headerlink" title="To Be Continued…"></a>To Be Continued…</h2><script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
+
+<h2 id="To-Be-Continued…"><a href="#To-Be-Continued…" class="headerlink" title="To Be Continued…"></a>To Be Continued…</h2>
+                
             </div>
             <hr/>
 
@@ -738,6 +728,8 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 
     
 
+    
+
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
@@ -810,7 +802,7 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            A splay tree is a self-balancing binary search tree. It performs operations such as insertion, look-up and removal in O(
+                            
                         
                     </div>
                     <div class="publish-info">
@@ -857,6 +849,8 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 
 <!-- 代码语言 -->
 
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
 
 <!-- 代码块复制 -->
 
@@ -868,16 +862,9 @@ end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span>
 <script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
-<!-- 代码块折行 -->
-
-<style type="text/css">
-code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
-</style>
-
-
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget">
+        <div class="toc-widget card" style="background-color: white;">
             <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
             <div id="toc-content"></div>
         </div>
@@ -1042,6 +1029,9 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     <div class="container row center-align" style="margin-bottom: 0px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
+            
+                <span id="year">2020</span>
+            
             <span id="year">2020</span>
             <a href="/about" target="_blank">Chujie Chen</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
@@ -1123,10 +1113,95 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("/search.xml", 'searchInput', 'searchResult');
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
 });
 </script>
 
@@ -1174,6 +1249,7 @@ $(function () {
 
     
 
+	
     
 
     

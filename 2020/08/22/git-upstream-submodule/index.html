@@ -29,10 +29,10 @@
 
     <script src="/libs/jquery/jquery.min.js"></script>
 
-<meta name="generator" content="Hexo 5.0.0"><link rel="alternate" href="/atom.xml" title="Black Vinegar" type="application/atom+xml">
-<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css">
-<link rel="stylesheet" href="/css/prism-line-numbers.css" type="text/css"><script src="/js/prism.js"></script>
-<script src="/js/prism-line-numbers.min.js"></script></head>
+<meta name="generator" content="Hexo 5.2.0"><link rel="alternate" href="/atom.xml" title="Black Vinegar" type="application/atom+xml">
+</head>
+
+
 
 
 <body>
@@ -287,8 +287,7 @@
     }
 
     .toc-widget .toc-title {
-        margin: 35px 0 15px 0;
-        padding-left: 17px;
+        padding: 35px 0 15px 17px;
         font-size: 1.5rem;
         font-weight: bold;
         line-height: 1.5rem;
@@ -300,7 +299,7 @@
     }
 
     #toc-content {
-        height: calc(100vh - 250px);
+        padding-bottom: 30px;
         overflow: auto;
     }
 
@@ -400,56 +399,47 @@
             </div>
         </div>
         <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.css">
+        
+
+        
+
         <div class="card-content article-card-content">
             <div id="articleContent">
                 <h1 id="Git-Upstreams-amp-Submodules"><a href="#Git-Upstreams-amp-Submodules" class="headerlink" title="Git Upstreams &amp; Submodules"></a>Git Upstreams &amp; Submodules</h1><h2 id="Upstreams"><a href="#Upstreams" class="headerlink" title="Upstreams"></a>Upstreams</h2><p>Sometimes you may encounter such a situation. You want to fork some projects and stay updated to those projects, but in the meantime you want to do some personal modifications. However, you don’t want to send those personal changes back to those upstreams (e.g those changes contain your personal information) and you want to make your forked repositories <strong>private</strong> (but you can’t with forking). Now all you need is git upstreams.</p>
 <p>To make things simply, let’s say there is one repository on github called <code>A</code>, the first thing you wanna do is create a new empty repository <code>B</code> in your github, record the <code>&lt;urlB&gt;</code> of your repo. Then clone repo <code>A</code> to your local machine as usual:</p>
-<pre class="line-numbers language-clike" data-language="clike"><code class="language-clike">$ git clone <span class="token operator">&lt;</span>urlA<span class="token operator">&gt;</span> repoName
-$ cd repoName<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> clone <span class="token operator">&lt;</span>urlA<span class="token operator">></span> repoName
+$ <span class="token builtin class-name">cd</span> repoName<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 <p>Make the origin of this <code>repoName</code>  upstream:</p>
-<pre class="line-numbers language-clike" data-language="clike"><code class="language-clike">$ git remote rename origin upstream<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> remote <span class="token function">rename</span> origin upstream<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>Use your <code>&lt;urlB&gt;</code> and add your <code>repoName</code> to this url:</p>
-<pre class="line-numbers language-clike" data-language="clike"><code class="language-clike">$ git remote add origin <span class="token operator">&lt;</span>urlB<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> remote <span class="token function">add</span> origin <span class="token operator">&lt;</span>urlB<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>Then you can push changes back to your repo <code>B</code>:</p>
-<pre class="line-numbers language-clike" data-language="clike"><code class="language-clike">$ git push origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> push origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>Till now, you successfully make <code>A</code> as upstream and <code>B</code> as the origin. Next time you want to update your <code>B</code> to <code>A</code>, all you need to do is:</p>
-<pre class="line-numbers language-clike" data-language="clike"><code class="language-clike">$ git pull upstream master <span class="token operator">&amp;&amp;</span> git push origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">git</span> pull upstream master <span class="token operator">&amp;&amp;</span> <span class="token function">git</span> push origin master<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 <p>Deal with those conflicts (if any) and then your private repo <code>B</code> is up to date with <code>A</code> but also have your own modifications as well.</p>
 <h2 id="Submodules"><a href="#Submodules" class="headerlink" title="Submodules"></a>Submodules</h2><p>Now let’s say you actually have a larger project <code>C</code> of which the <code>B</code> above is a part. In other words, you have two remote repos <code>C</code> and <code>B</code> and you want <code>B</code> updated with <code>A</code> as mentioned above. So <code>B</code> is in fact a submodule under <code>C</code>. This will cause some new issues, in fact. If you do nothing and try <code>git commit</code> the changes of <code>B</code> under <code>C</code> you will encounter warnings (<code>Changes not staged for commit</code>) and the changes are actually not commited. To solve this, you need to make <code>B</code> as submodule of <code>C</code> and pull/push two repos independently.</p>
-<pre class="line-numbers language-clike" data-language="clike"><code class="language-clike">$ cd <span class="token operator">/</span>path<span class="token operator">/</span>to<span class="token operator">/</span>local<span class="token operator">/</span>B
-$ git submodule add <span class="token operator">&lt;</span>urlB<span class="token operator">&gt;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token builtin class-name">cd</span> /path/to/local/B
+$ <span class="token function">git</span> submodule <span class="token function">add</span> <span class="token operator">&lt;</span>urlB<span class="token operator">></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
 <p>A common practice is when you finish your changes to <code>B</code> and <code>C</code>, go to the path of <code>B</code> and push those changes to repoB first:</p>
-<pre class="line-numbers language-clike" data-language="clike"><code class="language-clike">$ cd <span class="token operator">/</span>path<span class="token operator">/</span>to<span class="token operator">/</span>local<span class="token operator">/</span>B
-$ git add <span class="token punctuation">.</span>
-$ git commit <span class="token operator">-</span>m <span class="token string">"commitMsg"</span>
-$ git push origin master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token builtin class-name">cd</span> /path/to/local/B
+$ <span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+$ <span class="token function">git</span> commit -m <span class="token string">"commitMsg"</span>
+$ <span class="token function">git</span> push origin master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 <p>Then go back to the root of <code>C</code> and push changes:</p>
-<pre class="line-numbers language-clike" data-language="clike"><code class="language-clike">$ cd <span class="token operator">/</span>path<span class="token operator">/</span>to<span class="token operator">/</span>local<span class="token operator">/</span>C
-$ git add <span class="token punctuation">.</span>
-$ git commit <span class="token operator">-</span>m <span class="token string">"commitMsg"</span>
-$ git push origin master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token builtin class-name">cd</span> /path/to/local/C
+$ <span class="token function">git</span> <span class="token function">add</span> <span class="token builtin class-name">.</span>
+$ <span class="token function">git</span> commit -m <span class="token string">"commitMsg"</span>
+$ <span class="token function">git</span> push origin master<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span></span></code></pre>
 
 <p>If you have multiple submodules and you want to push changes of everything at one time (normally I don’t do it this way), you may want to take a look <a target="_blank" rel="noopener" href="https://www.vogella.com/tutorials/GitSubmodules/article.html">here</a>.</p>
-<script>
-        document.querySelectorAll('.github-emoji')
-          .forEach(el => {
-            if (!el.dataset.src) { return; }
-            const img = document.createElement('img');
-            img.style = 'display:none !important;';
-            img.src = el.dataset.src;
-            img.addEventListener('error', () => {
-              img.remove();
-              el.style.color = 'inherit';
-              el.style.backgroundImage = 'none';
-              el.style.background = 'none';
-            });
-            img.addEventListener('load', () => {
-              img.remove();
-            });
-            document.body.appendChild(img);
-          });
-      </script>
+
+                
             </div>
             <hr/>
 
@@ -705,6 +695,8 @@ $ git push origin master<span aria-hidden="true" class="line-numbers-rows"><span
 
     
 
+    
+
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
@@ -779,7 +771,7 @@ $ git push origin master<span aria-hidden="true" class="line-numbers-rows"><span
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            A* is a static path search algorithm which is used to find the shortest path from the source (S) to the goal (G) from a 
+                            
                         
                     </div>
                     <div class="publish-info">
@@ -826,6 +818,8 @@ $ git push origin master<span aria-hidden="true" class="line-numbers-rows"><span
 
 <!-- 代码语言 -->
 
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
 
 <!-- 代码块复制 -->
 
@@ -837,16 +831,9 @@ $ git push origin master<span aria-hidden="true" class="line-numbers-rows"><span
 <script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
 
 
-<!-- 代码块折行 -->
-
-<style type="text/css">
-code[class*="language-"], pre[class*="language-"] { white-space: pre !important; }
-</style>
-
-
     </div>
     <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
-        <div class="toc-widget">
+        <div class="toc-widget card" style="background-color: white;">
             <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;TOC</div>
             <div id="toc-content"></div>
         </div>
@@ -1004,6 +991,9 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     <div class="container row center-align" style="margin-bottom: 0px !important;">
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
+            
+                <span id="year">2020</span>
+            
             <span id="year">2020</span>
             <a href="/about" target="_blank">Chujie Chen</a>
             |&nbsp;Powered by&nbsp;<a href="https://hexo.io/" target="_blank">Hexo</a>
@@ -1085,10 +1075,95 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
     </div>
 </div>
 
-<script src="/js/search.js"></script>
 <script type="text/javascript">
 $(function () {
-    searchFunc("/search.xml", 'searchInput', 'searchResult');
+    var searchFunc = function (path, search_id, content_id) {
+        'use strict';
+        $.ajax({
+            url: path,
+            dataType: "xml",
+            success: function (xmlResponse) {
+                // get the contents from search data
+                var datas = $("entry", xmlResponse).map(function () {
+                    return {
+                        title: $("title", this).text(),
+                        content: $("content", this).text(),
+                        url: $("url", this).text()
+                    };
+                }).get();
+                var $input = document.getElementById(search_id);
+                var $resultContent = document.getElementById(content_id);
+                $input.addEventListener('input', function () {
+                    var str = '<ul class=\"search-result-list\">';
+                    var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+                    $resultContent.innerHTML = "";
+                    if (this.value.trim().length <= 0) {
+                        return;
+                    }
+                    // perform local searching
+                    datas.forEach(function (data) {
+                        var isMatch = true;
+                        var data_title = data.title.trim().toLowerCase();
+                        var data_content = data.content.trim().replace(/<[^>]+>/g, "").toLowerCase();
+                        var data_url = data.url;
+                        data_url = data_url.indexOf('/') === 0 ? data.url : '/' + data_url;
+                        var index_title = -1;
+                        var index_content = -1;
+                        var first_occur = -1;
+                        // only match artiles with not empty titles and contents
+                        if (data_title !== '' && data_content !== '') {
+                            keywords.forEach(function (keyword, i) {
+                                index_title = data_title.indexOf(keyword);
+                                index_content = data_content.indexOf(keyword);
+                                if (index_title < 0 && index_content < 0) {
+                                    isMatch = false;
+                                } else {
+                                    if (index_content < 0) {
+                                        index_content = 0;
+                                    }
+                                    if (i === 0) {
+                                        first_occur = index_content;
+                                    }
+                                }
+                            });
+                        }
+                        // show search results
+                        if (isMatch) {
+                            str += "<li><a href='" + data_url + "' class='search-result-title'>" + data_title + "</a>";
+                            var content = data.content.trim().replace(/<[^>]+>/g, "");
+                            if (first_occur >= 0) {
+                                // cut out 100 characters
+                                var start = first_occur - 20;
+                                var end = first_occur + 80;
+                                if (start < 0) {
+                                    start = 0;
+                                }
+                                if (start === 0) {
+                                    end = 100;
+                                }
+                                if (end > content.length) {
+                                    end = content.length;
+                                }
+                                var match_content = content.substr(start, end);
+                                // highlight all keywords
+                                keywords.forEach(function (keyword) {
+                                    var regS = new RegExp(keyword, "gi");
+                                    match_content = match_content.replace(regS, "<em class=\"search-keyword\">" + keyword + "</em>");
+                                });
+
+                                str += "<p class=\"search-result\">" + match_content + "...</p>"
+                            }
+                            str += "</li>";
+                        }
+                    });
+                    str += "</ul>";
+                    $resultContent.innerHTML = str;
+                });
+            }
+        });
+    };
+
+    searchFunc('/search.xml', 'searchInput', 'searchResult');
 });
 </script>
 
@@ -1136,6 +1211,7 @@ $(function () {
 
     
 
+	
     
 
     
