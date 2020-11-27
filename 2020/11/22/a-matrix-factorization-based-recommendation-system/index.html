@@ -361,12 +361,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Matlab/">
-                                <span class="chip bg-color">Matlab</span>
-                            </a>
-                        
                             <a href="/tags/Machine-learning/">
                                 <span class="chip bg-color">Machine learning</span>
+                            </a>
+                        
+                            <a href="/tags/Matlab/">
+                                <span class="chip bg-color">Matlab</span>
                             </a>
                         
                     </div>
@@ -406,8 +406,61 @@
         <hr class="clearfix">
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>Personalized recommendation systems are popular business applications of machine learning.</p>
-<h1 id="To-Be-Continued…"><a href="#To-Be-Continued…" class="headerlink" title="To Be Continued…"></a>To Be Continued…</h1><script>
+                <h2 id="Description"><a href="#Description" class="headerlink" title="Description"></a>Description</h2><p>Personalized recommendation systems are popular business applications of machine learning. Imagine given a set of ratings from Netflix users on many movies they have seen $(\text{ratings are from one star to five starts})$, how can we get a personalized rating predictor for a given user on unseen movies?</p>
+<p>Let’s say $U$ as a set of users and $I$ as a set of items, then the rating predictor can be expressed as $f: U \times I \rightarrow \mathcal{R}$. We can then use a matrix $M$ with size of $m \times n$ where $m$ rows represent users and columns are for $n$ movies. For example, if $M_{12,34} = 5$, that is, a 5 star is given by user 12 on movie 34. However, this rating matrix should be very sparse as it is impossible for everyone to watch large portion of movies in the market. More practically, only 1% of the cells in the rating matrix are observed in average while all other 99% are missing values. The objective of our predictor is to estimate those missing values, reflecting the user’s preference learned from available ratings.</p>
+<h2 id="Matrix-Factorization"><a href="#Matrix-Factorization" class="headerlink" title="Matrix Factorization"></a>Matrix Factorization</h2><p>Intuitively we can assume the matrix is a low-rank matrix as there are only a few factors $(\text{e.g, genre, director, main actor/actress, etc.})$ that determine the preferences. Let’s say we use $r$ as the number of factors. We can define the user profile $U \in \mathcal{R}^{m \times r}$, and the movie profile $V \in \mathcal{R}^{n \times r}$. Then we want to use the inner product of two length $r$ vectors to estimate the rating given by a user $u$ on movie $v$:<br>$$M_{u,v} \approx \sum_{k=1}^{r} U_{u,k} V_{v,k}$$<br>We use the sum of squares error (SSE) as our metrics and we can have the objective function we need to minimize:</p>
+<p>$$ E(U,V) = \sum_{(u,v) \in M} (M_{u,v} - U_{u}^T V_v)^2 = \sum_{(u,v) \in M} (M_{u,v} - \sum_{k=1}^r U_{u,k} V_{v,k})^2 $$</p>
+<p>This looks similar to the loss function of the linear regression:</p>
+<p>$$E(\theta) = \sum_{i=1}^m (Y^i - \theta^T x^i)^2 = \sum_{i=1}^m (Y^i - \sum_{k=1}^r \theta_k x_k^i)^2$$</p>
+<p>where $m$ is the size of training data. We can compare above two functions and see that for linear regression, we use the same $\theta$ on any input $x^i$, but for matrix factorization we are proposing, different rows of $U$ are applied based on the user $u$.</p>
+<h3 id="Gradient-Descent"><a href="#Gradient-Descent" class="headerlink" title="Gradient Descent"></a>Gradient Descent</h3><p>Since there is no closed form solution to our objective function, we use the gradient descent:</p>
+<p>$$U_{u,k} \leftarrow U_{u,k} - \mu \frac{\partial E(U,V)}{\partial U_{u,k}}$$</p>
+<p>where $\mu$ can be used as the update rate. And we have</p>
+<p>$$ \frac{\partial E(U,V)}{\partial U_{u,k}} = -2 \sum_{v|(u,v)\in M}(M_{u,v} - \sum_{k=1}^r U_{u,k} V_{v,k}) * V_{v,k} $$</p>
+<p>similarly for $V$, so we can do gradient descent:</p>
+<p>$$ U_{u,k} \leftarrow U_{u,k} + 2\mu \sum_{v|(u,v)\in M} (M_{u,v} - \sum_{k=1}^r U_{u,k} V_{v,k}) * V_{v,k} $$<br>$$ V_{v,k} \leftarrow V_{v,k} + 2\mu \sum_{v|(u,v)\in M} (M_{u,v} - \sum_{k=1}^r U_{u,k} V_{v,k}) * U_{u,k} $$</p>
+<h3 id="Regularization"><a href="#Regularization" class="headerlink" title="Regularization"></a>Regularization</h3><p>We can penalize for large values in $U$ and $V$ to avoid overfitting by including regularization terms. We can rewrite the regularized objective function:</p>
+<p>$$E(U,V) = \sum_{(u,v) \in M} (M_{u,v} - U_{u}^T V_v)^2 = \sum_{(u,v) \in M} (M_{u,v} - \sum_{k=1}^r U_{u,k} V_{v,k})^2 + \lambda \sum_{u,k} U_{u,k}^2 + \lambda \sum_{v,k} V_{v,k}^2$$</p>
+<p>where $lambda$ is a parameter which controls the importance of regularization terms. We can rewrite the gradient descent considering $(\text{take user profile as an instance})$:</p>
+<p>$$\frac{\partial E(U,V)}{\partial U_{u,k}} = -2 \sum_{v|(u,v)\in M}(M_{u,v} - \sum_{k=1}^r U_{u,k} V_{v,k}) * V_{v,k} + 2\lambda U_{u,k}$$</p>
+<p>so we have:<br>$$ U_{u,k} \leftarrow U_{u,k} + 2\mu \sum_{v|(u,v)\in M} (M_{u,v} - \sum_{k=1}^r U_{u,k} V_{v,k}) * V_{v,k} -  2\lambda U_{u,k}$$<br>and<br>$$ V_{v,k} \leftarrow V_{v,k} + 2\mu \sum_{v|(u,v)\in M} (M_{u,v} - \sum_{k=1}^r U_{u,k} V_{v,k}) * U_{u,k} - 2\lambda V_{v,k}$$</p>
+<h2 id="Coding-in-Matlab"><a href="#Coding-in-Matlab" class="headerlink" title="Coding in Matlab"></a>Coding in Matlab</h2><p>Let’s use the data set <a target="_blank" rel="noopener" href="https://github.com/ChujieChen/CSE_ISYE_6740_ComputationalDataAnalysis/raw/master/assigments/assignment3/movie_data.mat">movie_data.mat</a> as an example. The file contains the test set and a train set. The size of each set is $943 \times 1682$, i.e. 943 users and 1682 movies. Each value in the matrix can be 0: missing, or 1 - 5: ratings. The myRecommender.m is quite straightforward:</p>
+<pre class="line-numbers language-mathml" data-language="mathml"><code class="language-mathml">function [U, V] = myRecommender(rateMatrix, lowRank)
+    % Parameters
+    maxIter = 5e3; % Choose your own.
+    learningRate = 1e - 4; % Choose your own.
+    regularizer = 1e - 2; % Choose your own.
+
+    % Random initialization:
+    [n1, n2] = size(rateMatrix);
+    U = rand(n1, lowRank) / lowRank;
+    V = rand(n2, lowRank) / lowRank;
+
+    % Gradient Descent:
+    %% change of reconstruction error (see if it is converged) and iteration used to stop loop
+    deltaRecoError = 1e - 4 * nnz(rateMatrix &gt; 0);
+    recoError = Inf;
+    newRecoError = 5 * 5 * numel(rateMatrix);
+    it = 0;
+    %% update U and V
+    while abs(newRecoError - recoError) &gt; deltaRecoError &amp;&amp; it &lt; maxIter
+        recoError = newRecoError;
+        % note that if sum(Uuk*Vik) holds non-zero value for
+        % corresponding zero value Mui, we should not take it into account
+        % since we want UV to be similar to M as much as possible
+        U = U + 2 * learningRate * ((rateMatrix - U * V') .* (rateMatrix &gt; 0)) * V - 2 * learningRate * regularizer * U;
+        V = V + 2 * learningRate * ((rateMatrix - U * V') .* (rateMatrix &gt; 0))' * U - 2 * learningRate * regularizer * V;
+        % update the objective funtion
+        newRecoError = sumsqr((rateMatrix - U * V') .* (rateMatrix &gt; 0)) + regularizer * sumsqr(U) + regularizer * sumsqr(V);
+        it = it + 1;
+    end
+end<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+
+
+<h2 id="To-Be-Continued…"><a href="#To-Be-Continued…" class="headerlink" title="To Be Continued…"></a>To Be Continued…</h2><script>
         document.querySelectorAll('.github-emoji')
           .forEach(el => {
             if (!el.dataset.src) { return; }
@@ -488,12 +541,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Matlab/">
-                                    <span class="chip bg-color">Matlab</span>
-                                </a>
-                            
                                 <a href="/tags/Machine-learning/">
                                     <span class="chip bg-color">Machine learning</span>
+                                </a>
+                            
+                                <a href="/tags/Matlab/">
+                                    <span class="chip bg-color">Matlab</span>
                                 </a>
                             
                         </div>
@@ -727,12 +780,12 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Matlab/">
-                        <span class="chip bg-color">Matlab</span>
-                    </a>
-                    
                     <a href="/tags/Machine-learning/">
                         <span class="chip bg-color">Machine learning</span>
+                    </a>
+                    
+                    <a href="/tags/Matlab/">
+                        <span class="chip bg-color">Matlab</span>
                     </a>
                     
                 </div>
@@ -920,6 +973,13 @@ code[class*="language-"], pre[class*="language-"] { white-space: pre !important;
 
 </main>
 
+
+<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script>
+    MathJax.Hub.Config({
+        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
+    });
+</script>
 
 
 
