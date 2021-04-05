@@ -4,6 +4,33 @@
   
     
     <entry>
+      <title>Introduction to Feature Engineering</title>
+      <link href="2021/04/04/introduction-to-feature-engineering/"/>
+      <url>2021/04/04/introduction-to-feature-engineering/</url>
+      
+        <content type="html"><![CDATA[<p>Feature engineering is a crucial step in the process of predictive modeling. It involves the transformation of a given feature, with the objective of reducing the modeling error for a given target.</p><img src="https://i.ibb.co/kBRLTkN/Screen-Shot-2021-04-04-at-9-02-51-PM.png" class="" width="400" height="200" title="Fig.1 Feature Engineering in Machine Learning"><p>Feature engineering can be defined as a process that combine data science skillsets, domain knowledge, and intuition to create features to increase the predictive power of the learning algorithm. It can also be defined as a process attempting to create extra relevant features from existing raw features in the data.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> AI </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Machine Learning </tag>
+            
+            <tag> Feature Engineering </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>A Matrix-Factorization-Based Recommendation System</title>
       <link href="2020/11/22/a-matrix-factorization-based-recommendation-system/"/>
       <url>2020/11/22/a-matrix-factorization-based-recommendation-system/</url>

@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="https://chujiechen.github.io/"/>
-  <updated>2020-11-28T03:50:12.374Z</updated>
+  <updated>2021-04-05T05:30:10.585Z</updated>
   <id>https://chujiechen.github.io/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Introduction to Feature Engineering</title>
+    <link href="https://chujiechen.github.io/2021/04/04/introduction-to-feature-engineering/"/>
+    <id>https://chujiechen.github.io/2021/04/04/introduction-to-feature-engineering/</id>
+    <published>2021-04-05T04:53:40.000Z</published>
+    <updated>2021-04-05T05:30:10.585Z</updated>
+    
+    <summary type="html">
+    
+      
+      
+        
+        
+          &lt;p&gt;Feature engineering is a crucial step in the process of predictive modeling. It involves the transformation of a given feature, with the
+        
+      
+    
+    </summary>
+    
+    
+      <category term="AI" scheme="https://chujiechen.github.io/categories/AI/"/>
+    
+    
+      <category term="Machine Learning" scheme="https://chujiechen.github.io/tags/Machine-Learning/"/>
+    
+      <category term="Feature Engineering" scheme="https://chujiechen.github.io/tags/Feature-Engineering/"/>
+    
+  </entry>
   
   <entry>
     <title>A Matrix-Factorization-Based Recommendation System</title>
@@ -50,7 +79,7 @@
     <link href="https://chujiechen.github.io/2020/09/12/set-with-range-sums-using-splay-tree/"/>
     <id>https://chujiechen.github.io/2020/09/12/set-with-range-sums-using-splay-tree/</id>
     <published>2020-09-13T03:33:53.000Z</published>
-    <updated>2020-11-28T03:51:05.259Z</updated>
+    <updated>2021-04-05T05:21:01.121Z</updated>
     
     <summary type="html">
     
@@ -79,7 +108,7 @@
     <link href="https://chujiechen.github.io/2020/09/01/a-glance-at-state-hooks-in-react/"/>
     <id>https://chujiechen.github.io/2020/09/01/a-glance-at-state-hooks-in-react/</id>
     <published>2020-09-02T04:30:46.000Z</published>
-    <updated>2020-11-28T03:52:30.586Z</updated>
+    <updated>2021-04-05T05:21:09.055Z</updated>
     
     <summary type="html">
     

@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="Does A* always return an optimal path?, Black Vinegar">
+    <meta name="keywords" content="Introduction to Feature Engineering, Black Vinegar">
     <meta name="description" content="">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
@@ -16,7 +16,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>Does A* always return an optimal path? | Black Vinegar</title>
+    <title>Introduction to Feature Engineering | Black Vinegar</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -226,7 +226,7 @@
 <script src="/libs/cryptojs/crypto-js.min.js"></script>
 <script>
     (function() {
-        let pwd = '';
+        let pwd = 'password';
         if (pwd && pwd.length > 0) {
             if (pwd !== CryptoJS.SHA256(prompt('请输入访问本文章的密码 Password Needed')).toString(CryptoJS.enc.Hex)) {
                 alert('密码错误，将返回主页！Incorrect Password');
@@ -239,12 +239,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('https://www.growingwiththeweb.com/images/2012/06/03/demo.png')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('https://developers.google.com/machine-learning/crash-course/images/LinearProblem2.png')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">Does A* always return an optimal path?</h1>
+                    <h1 class="description center-align post-title">Introduction to Feature Engineering</h1>
                 </div>
             </div>
         </div>
@@ -360,12 +360,12 @@
                     
                     <div class="article-tag">
                         
-                            <a href="/tags/Math/">
-                                <span class="chip bg-color">Math</span>
+                            <a href="/tags/Machine-Learning/">
+                                <span class="chip bg-color">Machine Learning</span>
                             </a>
                         
-                            <a href="/tags/Algorithm/">
-                                <span class="chip bg-color">Algorithm</span>
+                            <a href="/tags/Feature-Engineering/">
+                                <span class="chip bg-color">Feature Engineering</span>
                             </a>
                         
                     </div>
@@ -376,8 +376,8 @@
                     <div class="post-cate">
                         <i class="fas fa-bookmark fa-fw icon-category"></i>
                         
-                            <a href="/categories/Algorithm/" class="post-category">
-                                Algorithm
+                            <a href="/categories/AI/" class="post-category">
+                                AI
                             </a>
                         
                     </div>
@@ -389,7 +389,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>Publish Date:&nbsp;&nbsp;
-                    2020-08-15
+                    2021-04-04
                 </div>
                 
 
@@ -413,10 +413,10 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <p>A* is a static path search algorithm which is used to find the shortest path from the source (S) to the goal (G) from a finite weighted graph. The math representation of A* is<br>$$f(n) = c(n) + h(n) $$</p>
-<p>Some people may prefer using $g$ instead of $c$ to indicate the cost function. And the $h$ is a heuristic function. More information can be found from the original <a target="_blank" rel="noopener" href="https://ai.stanford.edu/~nilsson/OnlinePubs-Nils/PublishedPapers/astar.pdf">paper</a>.</p>
-<p>So let’s get back to the title, how about the admissibility of A*? Well, as we can guess, it actually relies on the heuristic function. Again, A* algorithm requires the $h$ should be a ‘good’ estimation or ‘admissible’. It means that it has to be no longer than the actual distance. But if $h$ has no meaning, e.g. 0, then it is BFS. An example in real life is letting $h$ be the Euclidean distance from the node to the goal in navigation. But what does it do with the optimality? Here’s a simplified math proof – proof by contradiction:</p>
-<p>Say all previous states till $n$ have optimal cost values already. For the next state till $n’$ we would have $f(n’)=c(n’)+h(n’)$ which is minimum among states in OPEN list. But let’s assume $g(n’)$ itself is actually suboptimal,  that means there has to be at least one state $n’^*$ on an optimal path from S that is in OPEN,<br>$$c(n’^*) + h(n’^*) \geq  c(n’) + h(n’)  \qquad  (1)(\text{min})$$<br>meaning on the same time we have<br>$$c(n’^*) + \delta(n’^*, n’) &lt;  c(n’) \qquad  (2)(\text{assumption})$$<br>Rewrite (2) can give us<br>$$c(n’^*) + \delta(n’^*, n’) + h(n’) &lt;  c(n’) + h(n’) \qquad  (3) $$<br>As $h$ is admissible, we have<br>$$h(n’^*) +   \delta(n’^*, n’) &lt; h(n’) \qquad (4) (<br>\text{underestimate}) $$<br>So (3) would be<br>$$ c(n’^*) + h(n’^*) &lt; c(n’) + h(n’)$$<br>which is contradictory with (1), so $c(n)$ must be optimal.</p>
+                <p>Feature engineering is a crucial step in the process of predictive modeling. It involves the transformation of a given feature, with the objective of reducing the modeling error for a given target.</p>
+<img src="https://i.ibb.co/kBRLTkN/Screen-Shot-2021-04-04-at-9-02-51-PM.png" class="" width="400" height="200" title="Fig.1 Feature Engineering in Machine Learning">
+
+<p>Feature engineering can be defined as a process that combine data science skillsets, domain knowledge, and intuition to create features to increase the predictive power of the learning algorithm. It can also be defined as a process attempting to create extra relevant features from existing raw features in the data.</p>
 
                 
             </div>
@@ -443,7 +443,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="https://chujiechen.github.io/2020/08/15/admissibility-of-a/">https://chujiechen.github.io/2020/08/15/admissibility-of-a/</a>
+                    <a href="https://chujiechen.github.io/2021/04/04/introduction-to-feature-engineering/">https://chujiechen.github.io/2021/04/04/introduction-to-feature-engineering/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -481,12 +481,12 @@
                     
                         <div class="article-tag">
                             
-                                <a href="/tags/Math/">
-                                    <span class="chip bg-color">Math</span>
+                                <a href="/tags/Machine-Learning/">
+                                    <span class="chip bg-color">Machine Learning</span>
                                 </a>
                             
-                                <a href="/tags/Algorithm/">
-                                    <span class="chip bg-color">Algorithm</span>
+                                <a href="/tags/Feature-Engineering/">
+                                    <span class="chip bg-color">Feature Engineering</span>
                                 </a>
                             
                         </div>
@@ -657,7 +657,7 @@
         repo: 'chujiechen.github.io',
         owner: 'ChujieChen',
         admin: ["ChujieChen"],
-        id: '2020-08-15T22-19-36',
+        id: '2021-04-04T21-53-40',
         distractionFreeMode: false  // Facebook-like distraction free mode
     });
 
@@ -683,82 +683,35 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;Previous</div>
+                <i class="far fa-dot-circle"></i>&nbsp;Current
+            </div>
             <div class="card">
-                <a href="/2020/08/22/git-upstream-submodule/">
+                <a href="/2021/04/04/introduction-to-feature-engineering/">
                     <div class="card-image">
                         
-                        <img src="https://vitess.io/img/git-workflow.png" class="responsive-img" alt="Git Upstreams &amp; Submodules">
+                        <img src="https://developers.google.com/machine-learning/crash-course/images/LinearProblem2.png" class="responsive-img" alt="Introduction to Feature Engineering">
                         
-                        <span class="card-title">Git Upstreams &amp; Submodules</span>
+                        <span class="card-title">Introduction to Feature Engineering</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
                     <div class="summary block-with-text">
                         
-                            Keep track of repo without fork and manage child repos with submodules
-                        
-                    </div>
-                    <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2020-08-22
-                        </span>
-                        <span class="publish-author">
-                            
-                            <i class="fas fa-bookmark fa-fw icon-category"></i>
-                            
-                            <a href="/categories/Tool/" class="post-category">
-                                    Tool
-                                </a>
-                            
-                            
-                        </span>
-                    </div>
-                </div>
-                
-                <div class="card-action article-tags">
-                    
-                    <a href="/tags/Git/">
-                        <span class="chip bg-color">Git</span>
-                    </a>
-                    
-                </div>
-                
-            </div>
-        </div>
-        
-        
-        <div class="article col s12 m6" data-aos="fade-up">
-            <div class="article-badge right-badge text-color">
-                Current&nbsp;<i class="far fa-dot-circle"></i>
-            </div>
-            <div class="card">
-                <a href="/2020/08/15/admissibility-of-a/">
-                    <div class="card-image">
-                        
-                        <img src="https://www.growingwiththeweb.com/images/2012/06/03/demo.png" class="responsive-img" alt="Does A* always return an optimal path?">
-                        
-                        <span class="card-title">Does A* always return an optimal path?</span>
-                    </div>
-                </a>
-                <div class="card-content article-content">
-                    <div class="summary block-with-text">
-                        
-                            
+                            Feature engineering is a crucial step in the process of predictive modeling. It involves the transformation of a given feature, with the objective of reducing the modeling error for a given target.
                         
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2020-08-15
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-04-04
                             </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-bookmark fa-fw icon-category"></i>
                             
-                            <a href="/categories/Algorithm/" class="post-category">
-                                    Algorithm
+                            <a href="/categories/AI/" class="post-category">
+                                    AI
                                 </a>
                             
                             
@@ -769,12 +722,64 @@
                 
                 <div class="card-action article-tags">
                     
-                    <a href="/tags/Math/">
-                        <span class="chip bg-color">Math</span>
+                    <a href="/tags/Machine-Learning/">
+                        <span class="chip bg-color">Machine Learning</span>
                     </a>
                     
-                    <a href="/tags/Algorithm/">
-                        <span class="chip bg-color">Algorithm</span>
+                    <a href="/tags/Feature-Engineering/">
+                        <span class="chip bg-color">Feature Engineering</span>
+                    </a>
+                    
+                </div>
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                Next&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2020/11/22/a-matrix-factorization-based-recommendation-system/">
+                    <div class="card-image">
+                        
+                        <img src="https://miro.medium.com/max/11978/0*3C6CUn1FEC_raM8c" class="responsive-img" alt="A Matrix-Factorization-Based Recommendation System">
+                        
+                        <span class="card-title">A Matrix-Factorization-Based Recommendation System</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            A simple matrix-factorization-based recommender using gradient descent.
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2020-11-22
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/AI/" class="post-category">
+                                    AI
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/Machine-learning/">
+                        <span class="chip bg-color">Machine learning</span>
+                    </a>
+                    
+                    <a href="/tags/Matlab/">
+                        <span class="chip bg-color">Matlab</span>
                     </a>
                     
                 </div>
@@ -905,13 +910,6 @@
 
 </main>
 
-
-<script src="https://cdn.bootcss.com/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-<script>
-    MathJax.Hub.Config({
-        tex2jax: {inlineMath: [['$', '$'], ['\(', '\)']]}
-    });
-</script>
 
 
 
